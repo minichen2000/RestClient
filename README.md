@@ -8,7 +8,7 @@
 - Input/Output JSON string editor/formatter.
 
 # Build
-*(**NPM** needed.)*
+*(NPM needed.)*
 ```
 npm install
 ```
@@ -18,4 +18,4 @@ npm install
 npm start
 ```
 OR
-- Copy **RestClient** to your web server.
+> Copy **RestClient** to your web server.
