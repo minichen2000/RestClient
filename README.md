@@ -19,3 +19,6 @@ npm start
 ```
 OR
 > Copy **RestClient** to your web server.
+
+# How to use
+After run RestClient open a web browser and visit [http://localhost:8080] (http://localhost:8080) 
