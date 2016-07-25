@@ -21,4 +21,4 @@ OR
 > Copy **RestClient** to your web server.
 
 # How to use
-After run RestClient open a web browser and visit [http://localhost:8080] (http://localhost:8080) 
+Open a web browser and visit [http://localhost:8080] (http://localhost:8080) when **[RestClient](https://github.com/minichen2000/RestClient)** is on running.
