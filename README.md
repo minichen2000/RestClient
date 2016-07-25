@@ -6,3 +6,16 @@
 - Headers: only 2: Content-Type, Accept 
 - No query parameters support
 - Input/Output JSON string editor/formatter.
+
+# Build
+*(**NPM** needed.)*
+```
+npm install
+```
+ 
+# Run
+```
+npm start
+```
+OR
+- Copy **RestClient** to your web server.
