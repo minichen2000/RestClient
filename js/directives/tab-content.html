@@ -1,0 +1,116 @@
+<div style="padding:20px 8px 8px 20px">
+    <div ng-repeat="cmd in groupData.cmds">
+        <div class="panel panel-default" style="width:60%">
+            <div class="panel-body">
+                <div class="tab-content-cmd-title-style">{{$index+1+'.'+cmd.title}}</div>
+                <div ng-if="cmd.method" class="tab-content-row-style">
+                    <span class="tab-content-single-name-style">Method</span>
+                    <code class="tab-content-single-value-style">{{cmd.method}}</code>
+                    <a class="btn btn-link btn-sm" ui-zeroclip zeroclip-copied="copied=true"
+                       zeroclip-text="{{cmd.method}}" data-toggle="tooltip"
+                       title="copy">
+                        <i class="fa fa-copy"></i></a>
+                </div>
+                <div ng-if="cmd.path" class="tab-content-row-style">
+                    <span class="tab-content-single-name-style">Path</span>
+                    <code class="tab-content-single-value-style">{{cmd.path}}</code>
+                    <a class="btn btn-link btn-sm" ui-zeroclip zeroclip-copied="copied=true"
+                       zeroclip-text="{{cmd.path}}" data-toggle="tooltip"
+                       title="copy">
+                        <i class="fa fa-copy"></i></a>
+                </div>
+                <div ng-if="cmd.path_example" class="tab-content-row-style">
+                    <span class="tab-content-single-name-style">Path Example</span>
+                    <div class="tab-content-secondary-area-style">
+                    <div ng-repeat="example in cmd.path_example">
+                        <span class="tab-content-single-name-style">{{example.title}}</span>
+                        <code class="tab-content-single-value-style">{{example.content}}</code>
+                        <a class="btn btn-link btn-sm" ui-zeroclip zeroclip-copied="copied=true"
+                           zeroclip-text="{{example.content}}" data-toggle="tooltip"
+                           title="copy">
+                            <i class="fa fa-copy"></i></a>
+                    </div>
+                        </div>
+
+                </div>
+
+                <div ng-if="cmd.postBody" class="tab-content-row-style">
+                    <span class="tab-content-single-name-style">Post Body</span>
+                    <div style="position: relative">
+                        <pre class="tab-content-json-value-style" ng-class="{'pre-size-accordion': !accordionNotOn, 'pre-size-normal': accordionNotOn}">
+{{jsonString(cmd.postBody)}}</pre>
+                        <a class="btn btn-link pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                           zeroclip-text="{{jsonString(cmd.postBody)}}" data-toggle="tooltip"
+                           title="copy">
+                            <i class="fa fa-copy"></i>
+                        </a>
+                        <little-accordion-bt additional-class="'pre-accordion-bt-postion'" accordion-not-on="accordionNotOn"></little-accordion-bt>
+                    </div>
+                </div>
+                <div ng-if="cmd.postBody_example" class="tab-content-row-style">
+                    <span class="tab-content-single-name-style">Post Body Example</span>
+                    <div class="tab-content-secondary-area-style">
+                    <div ng-repeat="example in cmd.postBody_example">
+                        <span class="tab-content-single-name-style">{{example.title}}</span>
+                        <div style="position: relative">
+                        <pre class="tab-content-json-value-style" ng-class="{'pre-size-accordion': !accordionNotOn, 'pre-size-normal': accordionNotOn}">
+{{jsonString(example.content)}}</pre>
+                            <a class="btn btn-link pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                               zeroclip-text="{{jsonString(example.content)}}"
+                               data-toggle="tooltip"
+                               title="copy">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                            <little-accordion-bt additional-class="'pre-accordion-bt-postion'" accordion-not-on="accordionNotOn"></little-accordion-bt>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+
+
+                <div ng-if="cmd.postBody_fixed_part" class="tab-content-row-style">
+                    <span class="tab-content-single-name-style">Post Body Template</span>
+                    <div style="position: relative">
+                        <pre class="tab-content-json-value-style" ng-class="{'pre-size-accordion': !accordionNotOn, 'pre-size-normal': accordionNotOn}">
+{{makeJsonFixedPartString(cmd.postBody_fixed_part)}}
+  <!--<span class="customized-tips-style">...</span><br>-->
+  <span class="customized-tips-style">customized part goes here</span><br><br>
+  <!--<span class="customized-tips-style">...</span><br>-->
+}
+                        </pre>
+                        <a class="btn btn-link btn-sm pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                           zeroclip-text="{{makeJsonFixedPartCopyString(cmd.postBody_fixed_part)}}"
+                           data-toggle="tooltip"
+                           title="copy">
+                            <i class="fa fa-copy"></i>
+                        </a>
+                        <little-accordion-bt additional-class="'pre-accordion-bt-postion'" accordion-not-on="accordionNotOn"></little-accordion-bt>
+                    </div>
+
+                </div>
+                <div ng-if="cmd.postBody_customized_part_examples" class="tab-content-row-style">
+                    <span class="tab-content-single-name-style">Post Body Customized Part Examples</span>
+                    <div class="tab-content-secondary-area-style">
+                        <div ng-repeat="example in cmd.postBody_customized_part_examples">
+                            <span class="tab-content-single-name-style">{{example.title}}</span>
+
+                            <div style="position: relative">
+                                <pre class="tab-content-json-value-style" ng-class="{'pre-size-accordion': !accordionNotOn, 'pre-size-normal': accordionNotOn}">
+{{makeJsonCustomizedPartString(example.content)}}</pre>
+                                <a class="btn btn-link btn-sm pre-copy-bt-postion" ui-zeroclip zeroclip-copied="copied=true"
+                                   zeroclip-text="{{makeJsonCustomizedPartString(example.content)}}"
+                                   data-toggle="tooltip"
+                                   title="copy">
+                                    <i class="fa fa-copy"></i>
+                                </a>
+                                <little-accordion-bt additional-class="'pre-accordion-bt-postion'" accordion-not-on="accordionNotOn"></little-accordion-bt>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

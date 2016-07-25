@@ -1,0 +1,17 @@
+/target/
+.vscode/
+.classpath
+.project
+.settings
+logs/
+*.log
+*.iml
+!.gitkeep
+node_modules/
+platforms/
+plugins/
+tmp
+.idea
+.DS_Store
+bower_components/
+~*
