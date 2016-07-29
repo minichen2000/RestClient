@@ -29,122 +29,129 @@
 </head>
 
 <body ng-app="starter" ng-controller="MainController as vm">
-<div  style="width:100%; height:100%;padding: 20px 15px 5px 15px">
+<div style="width:100%; height:95%;padding: 5px 15px 2px 15px">
     <div style="position: relative;">
         <!--<a class="btn btn-warning btn-lg" style="position:absolute;right:50px; top:0px" href="doc.html" target="_blank">
             <i class="fa fa-question-circle fa-fw"></i>&nbsp;命令帮助
         </a>-->
 
-    <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label class="col-sm-1 control-label">Base URL</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" ng-model="vm.baseUrl"
-                       placeholder="Base URL">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">Base URL</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="vm.baseUrl"
+                           placeholder="Base URL">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-1 control-label">Path</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" ng-model="vm.path"
-                       placeholder="Path">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-2"><label>POST Body</label>&nbsp;&nbsp;<button class="btn btn-xs"
-                                                                     ng-class="{'btn-defult': vm.postBodyOptions.mode=='code', 'btn-defult': vm.postBodyOptions.mode!='code'}"
-                                                                     ng-click="vm.postBodyModeSwith()">{{vm.postBodyOptions.mode=='code' ? 'Tree' : 'Code'}}
-            </button>
-            </div>
-            <div class="col-sm-2 col-sm-offset-3"><label>Response</label>&nbsp;&nbsp;<button class="btn btn-xs"
-                        ng-class="{'btn-defult': vm.resultOptions.mode=='code', 'btn-defult': vm.resultOptions.mode!='code'}"
-                        ng-click="vm.resultModeSwith()">{{vm.resultOptions.mode=='code' ? 'Tree' : 'Code'}}
-                </button>
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-sm-5">
-                <div ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
-                     style="width:100%; height: 400px"></div>
-            </div>
-            <div class="col-sm-5">
-                <!--<json-formatter json="result" open="1" ng-if="result"></json-formatter>-->
-
-                <div ng-jsoneditor="vm.onLoad" ng-model="vm.result" options="vm.resultOptions"
-                     style="width:100%; height: 400px"></div>
-            </div>
-
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-1">
-                <button class="btn btn-success" ng-click="vm.onGet()">GET</button>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-primary" ng-click="vm.onPost()">POST</button>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-primary" ng-click="vm.onPut()">PUT</button>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-primary" ng-click="vm.onPatch()">PATCH</button>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-danger" ng-click="vm.onDelete()">DELETE</button>
-            </div>
-        </div>
-        <br>
-        <br>
-
-        <!--<div class="form-group">
-
-
-            <div class="col-sm-4">
-                <label class="control-label">Notifications</label>
-            </div>
-
-        </div>
-        <div class="form-group">
-
-            <div class="col-sm-4">
-
-                <div id="notifArea" style="width:100%; border: 1px solid cornflowerblue;height:500px; overflow: scroll">
-                    <oms-notif-line ng-repeat="ntf in vm.notifications"
-                                    line-one="ntf.line1"
-                                    line-one-style="{'font-weight': 'bold', 'font-family': 'Courier New', 'color': 'blue'}"
-                                    line-two="ntf.line2"
-                                    line-two-style="{'color': '#888', 'font-family': 'Courier New'}">
-
-                    </oms-notif-line>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">Path</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" ng-model="vm.path"
+                           placeholder="Path">
                 </div>
             </div>
 
-        </div>
-
-        <div class="form-group">
-
-            <div class="col-sm-4">
-                <button class=" btn btn-info"
-                        ng-click="vm.clearNotifications()">Clear
-                </button>
-                <button class=" btn btn-default"
-                        ng-class="{'btn-info': !vm.autoScroll, 'btn-defult': vm.autoScroll}"
-                        ng-click="vm.swithAutoScroll()">{{vm.autoScroll ? "StopScroll" : "AutoScroll"}}
-                </button>
+            <div class="form-group">
+                <div class="col-sm-2"><label>POST Body</label>&nbsp;&nbsp;
+                    <button class="btn btn-xs"
+                            ng-class="{'btn-defult': vm.postBodyOptions.mode=='code', 'btn-defult': vm.postBodyOptions.mode!='code'}"
+                            ng-click="vm.postBodyModeSwith()">{{vm.postBodyOptions.mode=='code' ? 'Tree' : 'Code'}}
+                    </button>
+                </div>
+                <div class="col-sm-2 col-sm-offset-3"><label>Response</label>&nbsp;&nbsp;
+                    <button class="btn btn-xs"
+                            ng-class="{'btn-defult': vm.resultOptions.mode=='code', 'btn-defult': vm.resultOptions.mode!='code'}"
+                            ng-click="vm.resultModeSwith()">{{vm.resultOptions.mode=='code' ? 'Tree' : 'Code'}}
+                    </button>
+                </div>
             </div>
 
-        </div>-->
-    </form>
+
+            <div class="form-group">
+                <div class="col-sm-5">
+                    <div ng-jsoneditor="vm.onLoad" ng-model="vm.postBody" options="vm.postBodyOptions"
+                         style="width:100%; height: 400px"></div>
+                </div>
+                <div class="col-sm-5">
+                    <!--<json-formatter json="result" open="1" ng-if="result"></json-formatter>-->
+
+                    <div ng-jsoneditor="vm.onLoad" ng-model="vm.result" options="vm.resultOptions"
+                         style="width:100%; height: 400px"></div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button class="btn btn-success" ng-click="vm.onGet()">GET</button>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" ng-click="vm.onPost()">POST</button>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" ng-click="vm.onPut()">PUT</button>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" ng-click="vm.onPatch()">PATCH</button>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-danger" ng-click="vm.onDelete()">DELETE</button>
+                </div>
+            </div>
+
+            <!--<div class="form-group">
 
 
+                <div class="col-sm-4">
+                    <label class="control-label">Notifications</label>
+                </div>
 
-</div>
-<div ng-if="(vm.logining && !vm.connected) || (vm.logouting && vm.connected) || vm.requestProcessing" style="position:absolute; top: 0px; left:0px; width:100%;background-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.5); text-align:center"
+            </div>
+            <div class="form-group">
+
+                <div class="col-sm-4">
+
+                    <div id="notifArea" style="width:100%; border: 1px solid cornflowerblue;height:500px; overflow: scroll">
+                        <oms-notif-line ng-repeat="ntf in vm.notifications"
+                                        line-one="ntf.line1"
+                                        line-one-style="{'font-weight': 'bold', 'font-family': 'Courier New', 'color': 'blue'}"
+                                        line-two="ntf.line2"
+                                        line-two-style="{'color': '#888', 'font-family': 'Courier New'}">
+
+                        </oms-notif-line>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <div class="col-sm-4">
+                    <button class=" btn btn-info"
+                            ng-click="vm.clearNotifications()">Clear
+                    </button>
+                    <button class=" btn btn-default"
+                            ng-class="{'btn-info': !vm.autoScroll, 'btn-defult': vm.autoScroll}"
+                            ng-click="vm.swithAutoScroll()">{{vm.autoScroll ? "StopScroll" : "AutoScroll"}}
+                    </button>
+                </div>
+
+            </div>-->
+        </form>
+
+
+    </div>
+    <div ng-if="vm.requestProcessing"
+         style="position:absolute; top: 0px; left:0px; height:100%;width:100%;background-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.5); text-align:center">
+        <i class="fa fa-spinner fa-pulse fa-5x fa-fw"
+           style="position: absolute; top:50%; left:50%; margin-left:-50px; margin-top:-20px"></i>
+    </div>
+    <!--
+    <div ng-if="vm.requestProcessing" style="position:absolute; top: 0px; left:0px; width:100%;background-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.5); text-align:center"
 ng-style="{'height': vm.requestProcessing ? '400%' : '100%', 'background-color': vm.requestProcessing ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.1)'}">
     <i class="fa fa-spinner fa-pulse fa-5x fa-fw" style="position: absolute; top:50%; left:50%; margin-left:-50px; margin-top:-20px"></i>
+</div>
+    -->
 </div>
 </body>
 </html>
