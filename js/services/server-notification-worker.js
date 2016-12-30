@@ -11,6 +11,8 @@
         //console.log("cmd:" + JSON.stringify(cmd));
         if (cmd.cmd == "connect") {
             connect(cmd.addr, cmd.heartbeat);
+        } else if (cmd.cmd == "connectOnce") {
+            connectOnce(cmd.addr, cmd.heartbeat);
         } else if (cmd.cmd == "sendJSON") {
             sendJSON(cmd.obj);
         } else if (cmd.cmd == "sendMessage") {
@@ -40,13 +42,15 @@
     function connectOnce(addr, heartbeat) {
         try {
             console.log("Try to connect to websocket: " + addr);
-            ws_state = 2;
+            ws_state = 3;
+            postMessage({ws_state:3});
             ws = new WebSocket(addr);
             console.log("Connected: " + addr);
 
             ws.onopen = function () {
                 console.log("ws onopen!");
                 ws_state = 1;
+                postMessage({ws_state:1});
             };
 
 
@@ -54,6 +58,7 @@
                 console.log("onerror: " + event);
 
                 ws_state = 0;
+                postMessage({ws_state:0});
                 ws.close();
             };
 
@@ -61,6 +66,7 @@
                 console.log("ws onclose.");
 
                 ws_state = 2;
+                postMessage({ws_state:2});
                 setTimeout(function () {
                     console.log("Reconnect to websocket.");
                     connect(addr, heartbeat);

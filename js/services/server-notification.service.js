@@ -27,7 +27,7 @@
 
 
         worker.onmessage = function (evt) {
-            logger.log((new Date()).toString()+'\n'+evt.data);
+            logger.log((new Date()).toString()+'\n'+JSON.stringify(evt.data));
 
             for (var i = 0; i < ws_listeners.length; i++) {
                 ws_listeners[i].fun(evt.data);
@@ -67,7 +67,7 @@
          */
         function connect(_addr, _heartbeat) {
             logger.debug("_addr:"+_addr);
-            worker.postMessage({ cmd: 'connect', addr: _addr, heartbeat: _heartbeat });
+            worker.postMessage({ cmd: 'connectOnce', addr: _addr, heartbeat: _heartbeat });
         };
 
         function sendJSON(_obj) {

@@ -32,12 +32,15 @@
             //instance.expandAll();
         };
 
-        vm.baseUrl='http://localhost';
-        vm.path=null;
+        vm.baseUrl='http://135.251.103.125:9000/Adapter';
+        vm.path="/nes";
         vm.result=null;
         vm.postBody=null;
         vm.postBodyOptions={mode: 'code'};
         vm.resultOptions={mode: 'code'};
+
+
+        vm.wsAddress="ws://135.251.103.125:19000";
 
         vm.onLogin=function(){
             vm.logining=true;
@@ -167,6 +170,10 @@
             onRequest('delete');
         }
 
+        vm.onNotificationConnect=function(){
+            serverNotificationService.connect(vm.wsAddress, "5000");
+        }
+
         vm.clearNotifications=function(){
             vm.notifications.length=0;
         }
@@ -189,20 +196,43 @@
         var listenerFun = function(evtData) {
             $scope.$apply(function() {
 
-                evtData=JSON.parse(evtData);
+                if(typeof evtData=="string"){
+                    evtData=JSON.parse(evtData);
+                }
+
                 logger.debug("notification msg:\n"+JSON.stringify(evtData, null,2));
-                vm.notifications.push({
-                    line1: '['+(new Date()).toString()+']',
-                    line2: JSON.stringify(evtData, null,2)
-                });
+                if(undefined!=evtData.ws_state){
+                    if(3==evtData.ws_state){
+                        vm.notifications.push({
+                            line1: '['+(new Date()).toString()+']  WebSocket try to connect.'
+                        });
+                    }else if(1==evtData.ws_state){
+                        vm.notifications.push({
+                            line1: '['+(new Date()).toString()+']  WebSocket connected.'
+                        });
+                    }else if(0==evtData.ws_state){
+                        vm.notifications.push({
+                            line1: '['+(new Date()).toString()+']  WebSocket error.'
+                        });
+                    }else if(2==evtData.ws_state){
+                        vm.notifications.push({
+                            line1: '['+(new Date()).toString()+']  WebSocket closed.'
+                        });
+                    }
+                }else{
+                    vm.notifications.push({
+                        line1: '['+(new Date()).toString()+']',
+                        line2: JSON.stringify(evtData, null,2)
+                    });
+                }
+
             });
             tryToAutoScroll();
 
         };
 
-        //serverNotificationService.connect(commonUtil.generateWSUrl(), "5000");
-        
-        //serverNotificationService.addListener({ name: 'main', fun: listenerFun });
+
+        serverNotificationService.addListener({ name: 'main', fun: listenerFun });
     }
 })();
 
