@@ -42,6 +42,8 @@
 
         vm.wsAddress="ws://135.251.103.125:19000";
 
+        vm.ws_state=2;
+
         vm.onLogin=function(){
             vm.logining=true;
                 $http({
@@ -173,6 +175,9 @@
         vm.onNotificationConnect=function(){
             serverNotificationService.connect(vm.wsAddress, "5000");
         }
+        vm.onNotificationDisconnect=function(){
+            serverNotificationService.close();
+        }
 
         vm.clearNotifications=function(){
             vm.notifications.length=0;
@@ -202,19 +207,20 @@
 
                 logger.debug("notification msg:\n"+JSON.stringify(evtData, null,2));
                 if(undefined!=evtData.ws_state){
-                    if(3==evtData.ws_state){
+                    vm.ws_state=evtData.ws_state;
+                    if(3==vm.ws_state){
                         vm.notifications.push({
                             line1: '['+(new Date()).toString()+']  WebSocket try to connect.'
                         });
-                    }else if(1==evtData.ws_state){
+                    }else if(1==vm.ws_state){
                         vm.notifications.push({
                             line1: '['+(new Date()).toString()+']  WebSocket connected.'
                         });
-                    }else if(0==evtData.ws_state){
+                    }else if(0==vm.ws_state){
                         vm.notifications.push({
                             line1: '['+(new Date()).toString()+']  WebSocket error.'
                         });
-                    }else if(2==evtData.ws_state){
+                    }else if(2==vm.ws_state){
                         vm.notifications.push({
                             line1: '['+(new Date()).toString()+']  WebSocket closed.'
                         });

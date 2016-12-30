@@ -38,6 +38,7 @@
             addListener: addListener,
             removeListener: removeListener,
             connect: connect,
+            close: close,
             sendJSON: sendJSON,
             sendMessage: sendMessage
         };
@@ -68,6 +69,11 @@
         function connect(_addr, _heartbeat) {
             logger.debug("_addr:"+_addr);
             worker.postMessage({ cmd: 'connectOnce', addr: _addr, heartbeat: _heartbeat });
+        };
+
+        function close() {
+            logger.debug("close");
+            worker.postMessage({ cmd: 'close'});
         };
 
         function sendJSON(_obj) {

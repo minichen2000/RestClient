@@ -2,7 +2,7 @@
     'use strict';
 
     var ws;
-    var ws_state = 0; //0: not connected, 1: connected, 2: trying to connect
+    var ws_state = 2; //0: error, 1: connected, 2: closed, 3: try to connect
     var heartbeatLaunched = false;
 
 
@@ -13,6 +13,8 @@
             connect(cmd.addr, cmd.heartbeat);
         } else if (cmd.cmd == "connectOnce") {
             connectOnce(cmd.addr, cmd.heartbeat);
+        } else if (cmd.cmd == "close") {
+            close();
         } else if (cmd.cmd == "sendJSON") {
             sendJSON(cmd.obj);
         } else if (cmd.cmd == "sendMessage") {
@@ -38,6 +40,9 @@
             }, 3000);
             return false;
         }
+    }
+    function close() {
+        ws.close();
     }
     function connectOnce(addr, heartbeat) {
         try {
@@ -67,10 +72,10 @@
 
                 ws_state = 2;
                 postMessage({ws_state:2});
-                setTimeout(function () {
+                /*setTimeout(function () {
                     console.log("Reconnect to websocket.");
                     connect(addr, heartbeat);
-                }, 3000);
+                }, 3000);*/
             };
 
 
@@ -83,12 +88,12 @@
             };
 
 
-            if (!heartbeatLaunched) {
+            /*if (!heartbeatLaunched) {
                 heartbeatLaunched = true;
                 setInterval(function () {
                     if (ws_state == 1) sendMessage("heartbeat: " + (new Date().toLocaleTimeString()));
                 }, heartbeat);
-            }
+            }*/
 
             return true;
         } catch (e) {
