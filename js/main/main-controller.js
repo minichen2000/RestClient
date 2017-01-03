@@ -210,24 +210,24 @@
                     vm.ws_state=evtData.ws_state;
                     if(3==vm.ws_state){
                         vm.notifications.push({
-                            line1: '['+(new Date()).toString()+']  WebSocket try to connect.'
+                            line1: '['+commonUtil.formatNowDateTime()+']  WebSocket try to connect.'
                         });
                     }else if(1==vm.ws_state){
                         vm.notifications.push({
-                            line1: '['+(new Date()).toString()+']  WebSocket connected.'
+                            line1: '['+commonUtil.formatNowDateTime()+']  WebSocket connected.'
                         });
                     }else if(0==vm.ws_state){
                         vm.notifications.push({
-                            line1: '['+(new Date()).toString()+']  WebSocket error.'
+                            line0: '['+commonUtil.formatNowDateTime()+']  WebSocket error.'
                         });
                     }else if(2==vm.ws_state){
                         vm.notifications.push({
-                            line1: '['+(new Date()).toString()+']  WebSocket closed.'
+                            line0: '['+commonUtil.formatNowDateTime()+']  WebSocket closed.'
                         });
                     }
                 }else{
                     vm.notifications.push({
-                        line1: '['+(new Date()).toString()+']',
+                        line1: '['+commonUtil.formatNowDateTime()+']',
                         line2: JSON.stringify(evtData, null,2)
                     });
                 }

@@ -10,9 +10,12 @@
 
   function commonUtil(logger, $q, $timeout, $interval, $location) {
 
-    var service = {
-      generateWSUrl: generateWSUrl
-    };
+      var service = {
+          generateWSUrl: generateWSUrl,
+          formatNowDateTime: formatNowDateTime,
+          formatDateTime: formatDateTime,
+          formatDate: formatDate
+      };
     return service;
 
     function generateWSUrl() {
@@ -26,6 +29,26 @@
       }
       return "ws" + rlt + "/notification";
     }
+      function formatDateTime(date) {
+          var year = date.getFullYear();
+          var month = date.getMonth() + 1;
+          var day = date.getDate();
+          var hours = date.getHours();
+          var minutes = date.getMinutes();
+          var seconds = date.getSeconds();
+          var milliseconds = date.getMilliseconds();
+          return ''+year+'/'+month+'/'+day+' '+hours+':'+minutes+':'+seconds+':'+milliseconds;
+      }
+      function formatDate(date) {
+          var year = date.getFullYear();
+          var month = date.getMonth() + 1;
+          var day = date.getDate();
+          return ''+year+'/'+month+'/'+day;
+      }
+      function formatNowDateTime() {
+          var date=new Date();
+          return formatDateTime(date);
+      }
   }
 
 

@@ -123,6 +123,8 @@
 
                     <div id="notifArea" style="width:100%; border: 1px solid cornflowerblue;height:500px; overflow: scroll">
                         <oms-notif-line ng-repeat="ntf in vm.notifications"
+                                        line-zero="ntf.line0"
+                                        line-zero-style="{'font-weight': 'bold', 'font-family': 'Courier New', 'color': 'red'}"
                                         line-one="ntf.line1"
                                         line-one-style="{'font-weight': 'bold', 'font-family': 'Courier New', 'color': 'blue'}"
                                         line-two="ntf.line2"

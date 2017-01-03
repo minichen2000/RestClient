@@ -10,6 +10,8 @@
             // can be used as attribute or element
             restrict: 'AE',
             scope: {
+                lineZero: '=',
+                lineZeroStyle: '=',
                 lineOne: '=',
                 lineOneStyle: '=',
                 lineTwo: '=',

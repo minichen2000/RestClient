@@ -1,4 +1,5 @@
 <div>
-    <p ng-style="lineOneStyle">{{lineOne}}</p>
-    <pre style="background: transparent; border: 0px;padding-top:1px; margin-top: 1px" ng-style="lineTwoStyle">{{lineTwo}}</pre>
+    <div ng-if="undefined!=lineZero" ng-style="lineZeroStyle">{{lineZero}}</div>
+    <div ng-if="undefined!=lineOne" ng-style="lineOneStyle">{{lineOne}}</div>
+    <pre ng-if="undefined!=lineTwo" style="background: transparent; border: 0px;padding-top:1px; margin-top: 1px" ng-style="lineTwoStyle">{{lineTwo}}</pre>
 </div>
