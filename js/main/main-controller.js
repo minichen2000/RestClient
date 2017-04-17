@@ -18,7 +18,7 @@
             //instance.expandAll();
         };
 
-        vm.baseUrl='http://localhost:9000/Adapter';
+        vm.baseUrl='http://localhost:9000/adapter';
         vm.path="/nes";
         vm.result=null;
         vm.postBody=null;
