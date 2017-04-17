@@ -101,9 +101,15 @@
 
             <div class="form-group">
 
-                <div class="col-sm-4">
+                <div class="col-sm-5 input-group" style="padding-left: 1%; padding-right: 1%">
                     <input type="text" class="form-control" ng-model="vm.wsAddress"
                            placeholder="WebSocket Address">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                        <ul id="color-dropdown-menu" class="dropdown-menu dropdown-menu-right" role="menu">
+                            <li ng-repeat="wsAddress in vm.wsAddressHistory.keys()" class="input-lg"><a href="#" ng-click="vm.onWsAddressHistorySelected(wsAddress)">{{wsAddress}}</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <button class="btn btn-primary" ng-click="vm.onNotificationConnect()" ng-disabled="vm.ws_state==1 || vm.ws_state==3 || vm.ws_state==0">Connect</button>
                 <button class="btn btn-danger" ng-click="vm.onNotificationDisconnect()" ng-disabled="vm.ws_state==2">Disconnect</button>
