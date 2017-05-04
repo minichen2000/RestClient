@@ -8,8 +8,8 @@
         .module('starter')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$http', '$scope', 'commonUtil', 'logger', '$interval', '$timeout', 'serverNotificationService'];
-    function MainController($http, $scope, commonUtil, logger, $interval, $timeout, serverNotificationService) {
+    MainController.$inject = ['$http', 'FileSaver', 'Blob', '$scope', 'commonUtil', 'logger', '$interval', '$timeout', 'serverNotificationService'];
+    function MainController($http, FileSaver, Blob, $scope, commonUtil, logger, $interval, $timeout, serverNotificationService) {
         var vm = this;
         vm.requestProcessing=false;
         vm.notifications=[];
@@ -44,19 +44,46 @@
             vm.resultOptions.mode=vm.resultOptions.mode=='code' ? 'tree' : 'code';
         };
 
+        function isBinary(headerFun){
+            var type = headerFun("Content-Type");
+            return (!type.startsWith("text/") &&
+                !type.startsWith("application/json") &&
+                !type.startsWith("application/xml"));
+        }
+
         function onRequest(method_){
             vm.requestProcessing=true;
             var url_=vm.baseUrl+vm.path;
             logger.debug("url:["+method_+']: '+url_);
-            $http({
+            var config={
                 method: method_,
                 url: url_,
-                data: JSON.stringify(vm.postBody ? vm.postBody : "")
-            })
+                data: JSON.stringify(vm.postBody ? vm.postBody : ""),
+                responseType: "arraybuffer",
+                transformResponse: function(data, headersGetter, status) {
+                    if(isBinary(headersGetter)){
+                        return data;
+                    }
+                    var decoder = new TextDecoder("utf-8");
+                    var domString = decoder.decode(data);
+                    if(headersGetter("Content-Type").startsWith("application/json")){
+                        return JSON.parse(domString);
+                    }else{
+                        return domString;
+                    }
+                }
+            };
+
+            $http(config)
                 .then(function(rsp){
-                    var rlt=JSON.stringify(rsp, null, 2);
-                    //logger.debug("rsp:"+rlt);
-                    vm.result=rsp.data;
+                    if(isBinary(rsp.headers)){
+                        var blob = new Blob([rsp.data], {type: "application/binary"});
+                        FileSaver.saveAs(blob, 'download');
+                    }else{
+                        var rlt=JSON.stringify(rsp, null, 2);
+                        logger.debug("rsp:"+rlt);
+                        vm.result=rsp.data;
+                    }
                     vm.requestProcessing=false;
                 })
                 .catch(function(rsp){
